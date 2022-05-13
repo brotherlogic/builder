@@ -18,7 +18,7 @@ func (s *Server) runBuild(ctx context.Context, gha string) error {
 
 	os.Chdir(WORKING_DIR)
 
-	out1, err := exec.Command("git", "clone", "./", gha).CombinedOutput()
+	out1, err := exec.Command("git", "clone", gha, "./").CombinedOutput()
 	if err != nil {
 		return fmt.Errorf("%v -> %v", err, string(out1))
 	}
