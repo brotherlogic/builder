@@ -38,7 +38,10 @@ func main() {
 
 		if err := buildFlags.Parse(os.Args[2:]); err == nil {
 			if len(*name) > 0 {
-				client.Refresh(ctx, &pb.RefreshRequest{Job: *name})
+				_, err := client.Refresh(ctx, &pb.RefreshRequest{Job: *name})
+				if err != nil {
+					log.Fatalf("Error: %v", err)
+				}
 			}
 		}
 	}
