@@ -41,6 +41,5 @@ func main() {
 				client.Refresh(ctx, &pb.RefreshRequest{Job: *name})
 			}
 		}
-
 	}
 }
