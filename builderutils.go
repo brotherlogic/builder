@@ -33,6 +33,11 @@ func (s *Server) runBuild(ctx context.Context, gha string) error {
 		return fmt.Errorf("(%v) %v -> %v", s.Registry.Identifier, err, string(out3))
 	}
 
+	out6, err := exec.Command("git", "commit", "-am", "DownstreamUpdates").CombinedOutput()
+	if err != nil {
+		return fmt.Errorf("(%v) %v -> %v", s.Registry.Identifier, err, string(out6))
+	}
+
 	out4, err1 := exec.Command("git", "push", "origin", "main").CombinedOutput()
 	out5, err2 := exec.Command("git", "push", "origin", "master").CombinedOutput()
 
