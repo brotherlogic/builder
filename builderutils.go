@@ -18,26 +18,26 @@ func (s *Server) runBuild(ctx context.Context, gha string) error {
 
 	os.Chdir(WORKING_DIR)
 
-	err := exec.Command("git", "clone", "./", gha).Run()
+	out1, err := exec.Command("git", "clone", "./", gha).CombinedOutput()
 	if err != nil {
-		return err
+		return fmt.Errorf("%v -> %v", err, string(out1))
 	}
 
-	err = exec.Command("go", "get", "-u", "./...").Run()
+	out2, err := exec.Command("go", "get", "-u", "./...").CombinedOutput()
 	if err != nil {
-		return err
+		return fmt.Errorf("%v -> %v", err, string(out2))
 	}
 
-	err = exec.Command("go", "mod", "tidy").Run()
+	out3, err := exec.Command("go", "mod", "tidy").CombinedOutput()
 	if err != nil {
-		return err
+		return fmt.Errorf("%v -> %v", err, string(out3))
 	}
 
-	err1 := exec.Command("git", "push", "origin", "main").Run()
-	err2 := exec.Command("git", "push", "origin", "master").Run()
+	out4, err1 := exec.Command("git", "push", "origin", "main").CombinedOutput()
+	out5, err2 := exec.Command("git", "push", "origin", "master").CombinedOutput()
 
 	if err1 != nil && err2 != nil {
-		return fmt.Errorf("Unable to push: %v or %v", err1, err2)
+		return fmt.Errorf("Unable to push: %v or %v -> %v, %v", err1, err2, out4, out5)
 	}
 
 	return nil
