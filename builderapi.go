@@ -15,5 +15,5 @@ const (
 
 //AddRecord adds a record into the system
 func (s *Server) Refresh(ctx context.Context, req *pb.RefreshRequest) (*pb.RefreshResponse, error) {
-	return nil, fmt.Errorf("Unable to refresh")
+	return &pb.RefreshResponse{}, s.runBuild(ctx, fmt.Sprintf("git@github.com:brotherlogic/%v", req.GetJob()))
 }
