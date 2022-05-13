@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package builder;
+
+option go_package = "github.com/brotherlogic/builder/proto";
+
+message RefreshRequest {
+  string job = 1;
+}
+
+message RefreshResponse {}
+
+service Build {
+  rpc Refresh(RefreshRequest) returns (RefreshResponse) {};
+}
+
