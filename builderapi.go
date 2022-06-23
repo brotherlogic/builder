@@ -16,5 +16,9 @@ const (
 //AddRecord adds a record into the system
 func (s *Server) Refresh(ctx context.Context, req *pb.RefreshRequest) (*pb.RefreshResponse, error) {
 	s.CtxLog(ctx, fmt.Sprintf("Building for %v", req.GetJob()))
-	return &pb.RefreshResponse{}, s.runBuild(ctx, fmt.Sprintf("git@github.com:brotherlogic/%v", req.GetJob()))
+	err := s.runBuild(ctx, fmt.Sprintf("git@github.com:brotherlogic/%v", req.GetJob()))
+	if err != nil {
+		s.BounceIssue(req.GetJob(), "Refresh Build Error", fmt.Sprintf("%v", err))
+	}
+	return &pb.RefreshResponse{},err
 }
