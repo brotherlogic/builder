@@ -17,8 +17,9 @@ const (
 func (s *Server) Refresh(ctx context.Context, req *pb.RefreshRequest) (*pb.RefreshResponse, error) {
 	s.CtxLog(ctx, fmt.Sprintf("Building for %v", req.GetJob()))
 	err := s.runBuild(ctx, fmt.Sprintf("git@github.com:brotherlogic/%v", req.GetJob()))
+	s.CtxLog(ctx, fmt.Sprintf("Build result: %v", err))
 	if err != nil {
 		s.BounceIssue(req.GetJob(), "Refresh Build Error", fmt.Sprintf("%v", err))
 	}
-	return &pb.RefreshResponse{},err
+	return &pb.RefreshResponse{}, err
 }
