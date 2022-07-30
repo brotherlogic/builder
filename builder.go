@@ -52,10 +52,10 @@ func (s *Server) GetState() []*pbg.State {
 
 func main() {
 	server := Init()
-	server.PrepServer()
+	server.PrepServer("builder")
 	server.Register = server
 
-	err := server.RegisterServerV2("builder", false, true)
+	err := server.RegisterServerV2(false)
 	if err != nil {
 		return
 	}
