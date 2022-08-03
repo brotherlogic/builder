@@ -14,6 +14,10 @@ const (
 )
 
 func (s *Server) runBuild(ctx context.Context, gha string) error {
+	// Only build one thing at a time
+	s.lock.Lock()
+	defer s.lock.Unlock()
+
 	os.MkdirAll(WORKING_DIR, 0700)
 	defer os.RemoveAll(WORKING_DIR)
 
