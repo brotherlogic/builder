@@ -2,13 +2,16 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
 	"os"
+	"sync"
 	"time"
 
 	"github.com/brotherlogic/goserver/utils"
 
 	pb "github.com/brotherlogic/builder/proto"
+	dpb "github.com/brotherlogic/discovery/proto"
 
 	//Needed to pull in gzip encoding init
 	_ "google.golang.org/grpc/encoding/gzip"
@@ -32,6 +35,33 @@ func main() {
 	client := pb.NewBuildClient(conn)
 
 	switch os.Args[1] {
+	case "fullbuild":
+		conn2, err2 := utils.LFDial(utils.Discover)
+		if err2 != nil {
+			log.Fatalf("Unable to dial: %v", err2)
+		}
+		dclient := dpb.NewDiscoveryServiceV2Client(conn2)
+		alljobs, err := dclient.Get(ctx, &dpb.GetRequest{})
+		if err != nil {
+			log.Fatalf("All jobs request failed: %v", err)
+		}
+
+		jobm := make(map[string]bool)
+		for _, j := range alljobs.GetServices() {
+			jobm[j.GetName()] = true
+		}
+
+		wg := &sync.WaitGroup{}
+		for j := range jobm {
+			fmt.Printf("Building %v\n", j)
+			wg.Add(1)
+			go func(job string) {
+				client.Refresh(ctx, &pb.RefreshRequest{Job: job})
+				fmt.Printf("Built %v\n", job)
+				wg.Done()
+			}(j)
+		}
+		wg.Wait()
 	case "build":
 		buildFlags := flag.NewFlagSet("Build", flag.ExitOnError)
 		var name = buildFlags.String("name", "", "Id of the record to add")
