@@ -36,6 +36,8 @@ func main() {
 
 	switch os.Args[1] {
 	case "fullbuild":
+		ctx, cancel := utils.ManualContext("builder-cli", time.Hour*2)
+		defer cancel()
 		conn2, err2 := utils.LFDial(utils.Discover)
 		if err2 != nil {
 			log.Fatalf("Unable to dial: %v", err2)
@@ -56,8 +58,8 @@ func main() {
 			fmt.Printf("Building %v\n", j)
 			wg.Add(1)
 			go func(job string) {
-				client.Refresh(ctx, &pb.RefreshRequest{Job: job})
-				fmt.Printf("Built %v\n", job)
+				_, err := client.Refresh(ctx, &pb.RefreshRequest{Job: job})
+				fmt.Printf("Built %v 0> %v\n", job, err)
 				wg.Done()
 			}(j)
 		}
