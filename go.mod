@@ -3,8 +3,9 @@ module github.com/brotherlogic/builder
 go 1.16
 
 require (
-	github.com/brotherlogic/discovery v0.0.0-20220807001338-21d1d2714c5c
-	github.com/brotherlogic/goserver v0.0.0-20220816234214-c6c7562bbbc3
+	github.com/brotherlogic/discovery v0.0.0-20220817003605-cdc1453b9396
+	github.com/brotherlogic/goserver v0.0.0-20220819181159-c728a3f047e7
+	github.com/brotherlogic/keystore v0.0.0-20220819185815-11fa9a680d69 // indirect
 	github.com/golang/protobuf v1.5.2
 	golang.org/x/net v0.0.0-20220812174116-3211cb980234
 	google.golang.org/grpc v1.48.0
