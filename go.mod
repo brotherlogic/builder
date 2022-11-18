@@ -7,7 +7,7 @@ require (
 	github.com/brotherlogic/goserver v0.0.0-20221106165541-0672428e3628
 	github.com/golang/protobuf v1.5.2
 	golang.org/x/net v0.2.0
-	google.golang.org/grpc v1.50.1
+	google.golang.org/grpc v1.51.0
 	google.golang.org/protobuf v1.28.1
 )
 
@@ -20,7 +20,7 @@ require (
 	github.com/brotherlogic/gobuildslave v0.0.0-20221102013257-50e8875754ff // indirect
 	github.com/brotherlogic/keystore v0.0.0-20221118101511-9bbbd1bfa3b7 // indirect
 	github.com/brotherlogic/lock v0.0.0-20221031210630-ece55f4dcdf4 // indirect
-	github.com/brotherlogic/logging v0.0.0-20221025153509-fcd1f9a46d06 // indirect
+	github.com/brotherlogic/logging v0.0.0-20221118161817-1bccbb0823d4 // indirect
 	github.com/brotherlogic/monitor v0.0.0-20221025152653-c10877c5f9e6 // indirect
 	github.com/brotherlogic/versionserver v0.0.0-20221025154054-c9bcd41be2f2 // indirect
 	github.com/cespare/xxhash/v2 v2.1.2 // indirect
