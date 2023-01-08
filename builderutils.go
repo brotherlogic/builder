@@ -54,7 +54,7 @@ func (s *Server) runBuild(ctx context.Context, gha string) error {
 	out4, err1 := exec.Command("git", "push", "origin", branch).CombinedOutput()
 
 	if err1 != nil {
-		return status.Errorf(codes.FailedPrecondition, "(%v) Unable to push: %v or %v -> %v, %v", s.Registry.Identifier, err1, string(out4))
+		return status.Errorf(codes.FailedPrecondition, "(%v) Unable to push: %v -> %v", s.Registry.Identifier, err1, string(out4))
 	}
 
 	return nil
