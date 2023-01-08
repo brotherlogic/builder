@@ -1,8 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	"os/exec"
+	"time"
 
 	"golang.org/x/net/context"
 	"google.golang.org/grpc/codes"
@@ -28,6 +30,12 @@ func (s *Server) runBuild(ctx context.Context, gha string) error {
 		return status.Errorf(codes.FailedPrecondition, "clone (%v) %v -> %v", s.Registry.Identifier, err, string(out1))
 	}
 
+	branch := fmt.Sprintf("update-%v", time.Now().Unix())
+	out1a, err := exec.Command("git", "checkout", "-b", branch).CombinedOutput()
+	if err != nil {
+		return status.Errorf(codes.FailedPrecondition, "checkout (%v) %v -> %v", s.Registry.Identifier, err, string(out1a))
+	}
+
 	out2, err := exec.Command("go", "get", "-u", "./...").CombinedOutput()
 	if err != nil {
 		return status.Errorf(codes.FailedPrecondition, "go get (%v) %v -> %v", s.Registry.Identifier, err, string(out2))
@@ -43,11 +51,10 @@ func (s *Server) runBuild(ctx context.Context, gha string) error {
 		return status.Errorf(codes.FailedPrecondition, "commit (%v) %v -> %v", s.Registry.Identifier, err, string(out6))
 	}
 
-	out4, err1 := exec.Command("git", "push", "origin", "main").CombinedOutput()
-	out5, err2 := exec.Command("git", "push", "origin", "master").CombinedOutput()
+	out4, err1 := exec.Command("git", "push", "origin", branch).CombinedOutput()
 
-	if err1 != nil && err2 != nil {
-		return status.Errorf(codes.FailedPrecondition, "(%v) Unable to push: %v or %v -> %v, %v", s.Registry.Identifier, err1, err2, string(out4), string(out5))
+	if err1 != nil {
+		return status.Errorf(codes.FailedPrecondition, "(%v) Unable to push: %v or %v -> %v, %v", s.Registry.Identifier, err1, string(out4))
 	}
 
 	return nil
