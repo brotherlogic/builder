@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"strings"
 	"time"
 
 	"golang.org/x/net/context"
@@ -48,7 +49,9 @@ func (s *Server) runBuild(ctx context.Context, gha string) error {
 
 	out6, err := exec.Command("git", "commit", "-am", "DownstreamUpdates").CombinedOutput()
 	if err != nil {
-		return status.Errorf(codes.FailedPrecondition, "commit (%v) %v -> %v", s.Registry.Identifier, err, string(out6))
+		if !strings.Contains(string(out6), "nothing to commit") {
+			return status.Errorf(codes.FailedPrecondition, "commit (%v) %v -> %v", s.Registry.Identifier, err, string(out6))
+		}
 	}
 
 	out4, err1 := exec.Command("git", "push", "origin", branch).CombinedOutput()
