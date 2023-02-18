@@ -6,7 +6,7 @@ require (
 	github.com/brotherlogic/discovery v0.0.0-20230205183007-0f1849fee07b
 	github.com/brotherlogic/goserver v0.0.0-20230208171911-c95aab060a3f
 	github.com/golang/protobuf v1.5.2
-	golang.org/x/net v0.6.0
+	golang.org/x/net v0.7.0
 	google.golang.org/grpc v1.53.0
 	google.golang.org/protobuf v1.28.1
 )
