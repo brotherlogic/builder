@@ -1323,8 +1323,8 @@ github.com/brotherlogic/discovery v0.0.0-20230909193455-528d1a652566/go.mod h1:V
 github.com/brotherlogic/discovery v0.0.0-20230909214340-cdae9da9d89f/go.mod h1:tRHNTg19YWxnokB8kbjagtDlAqJ7tl97CQJGmuFWnfo=
 github.com/brotherlogic/discovery v0.0.0-20230916220354-e6ee8b406087/go.mod h1:WMiqNNm/ybo2hDlWnn9hSdDSneveotVcfCZNzNp5fTU=
 github.com/brotherlogic/discovery v0.0.0-20230923220958-97b28e0a236a/go.mod h1:VatrvmiJlmxleu2h11dpZPofAi6waMtBRI/s7DE1Ovs=
-github.com/brotherlogic/discovery v0.0.0-20230930225044-a549d980ce33 h1:w5isDcDPitMygpFscBHLnoxcVHHDaJyt4WFslFyxp3s=
-github.com/brotherlogic/discovery v0.0.0-20230930225044-a549d980ce33/go.mod h1:wa2kpnAm0mdwBoaXxj0VA/8TFOvOCWWX53MXIHLWmfo=
+github.com/brotherlogic/discovery v0.0.0-20231002182115-32762136810d h1:Jg5/tyaTp85XH8LE9dYdXMHgmFmKC28D9QyncwiAmUk=
+github.com/brotherlogic/discovery v0.0.0-20231002182115-32762136810d/go.mod h1:5zqFlSm0y+OQaG+rvU6HyTwBHgMl49cJBryzM4EEgME=
 github.com/brotherlogic/dstore v0.0.0-20210705011309-803d7db560a6/go.mod h1:SJdI/5dxubp66yy6slmUfen5yCIKXFvAmMs71u9xVrk=
 github.com/brotherlogic/dstore v0.0.0-20210728181450-e87a34c62535/go.mod h1:bwiN0EPWhmDNwue1BWpCQ7DL4hLwfDwDw8JwMMgDzCs=
 github.com/brotherlogic/dstore v0.0.0-20210911232556-7a6844e1f86f/go.mod h1:Wilk+LrYLvE5+fNDXp0dYQNTMxhb6rmkwv5GwZ/K3ok=
@@ -5346,8 +5346,9 @@ google.golang.org/genproto/googleapis/rpc v0.0.0-20230822172742-b8732ec3820d/go.
 google.golang.org/genproto/googleapis/rpc v0.0.0-20230911183012-2d3300fd4832/go.mod h1:+Bk1OCOj40wS2hwAMA+aCW9ypzm63QTBBHp6lQ3p+9M=
 google.golang.org/genproto/googleapis/rpc v0.0.0-20230913181813-007df8e322eb/go.mod h1:+Bk1OCOj40wS2hwAMA+aCW9ypzm63QTBBHp6lQ3p+9M=
 google.golang.org/genproto/googleapis/rpc v0.0.0-20230920183334-c177e329c48b/go.mod h1:+Bk1OCOj40wS2hwAMA+aCW9ypzm63QTBBHp6lQ3p+9M=
-google.golang.org/genproto/googleapis/rpc v0.0.0-20230920204549-e6e6cdab5c13 h1:N3bU/SQDCDyD6R528GJ/PwW9KjYcJA3dgyH+MovAkIM=
 google.golang.org/genproto/googleapis/rpc v0.0.0-20230920204549-e6e6cdab5c13/go.mod h1:KSqppvjFjtoCI+KGd4PELB0qLNxdJHRGqRI09mB6pQA=
+google.golang.org/genproto/googleapis/rpc v0.0.0-20231002182017-d307bd883b97 h1:6GQBEOdGkX6MMTLT9V+TjtIRZCw9VPD5Z+yHY9wMgS0=
+google.golang.org/genproto/googleapis/rpc v0.0.0-20231002182017-d307bd883b97/go.mod h1:v7nGkzlmW8P3n/bKmWBn2WpBjpOEx8Q6gMueudAmKfY=
 google.golang.org/grpc v1.17.0/go.mod h1:6QZJwpn2B+Zp71q/5VxRsJ6NXXVCE5NRUHRo+f3cWCs=
 google.golang.org/grpc v1.19.0/go.mod h1:mqu4LbDTu4XGKhr4mRzUsmM4RtVoemTSY81AxZiDr8c=
 google.golang.org/grpc v1.20.0/go.mod h1:chYK+tFQF0nDUGJgXMSgLCQk3phJEuONr2DCgLDdAQM=
