@@ -52,11 +52,19 @@ func (s *Server) runBuild(ctx context.Context, gha string) error {
 		return status.Errorf(codes.FailedPrecondition, "go mod (%v) %v -> %v", s.Registry.Identifier, err, string(out3))
 	}
 
-	// Add the PR closer file
 	out5, err := exec.Command("sed", "-i", "-e", fmt.Sprintf("s/%v/%v/g", OLD_GO, NEW_GO), ".github/workflows/basicrun.yml").CombinedOutput()
 	if err != nil {
 		return status.Errorf(codes.FailedPrecondition, "awk (%v) -> %v, %v", s.Registry.Identifier, err, string(out5))
 	}
+
+	// Add the PR closer file
+	out7, err := exec.Command("curl", "https://raw.githubusercontent.com/brotherlogic/discovery/main/.github/workflows/close.yml", "-o", ".github/workflows/close.yml").CombinedOutput()
+	if err != nil {
+		return status.Errorf(codes.FailedPrecondition, "Failed download: %v -> %v", err, string(out7))
+	}
+
+	out9, err := exec.Command("git", "add", ".github/workflows/close.yml").CombinedOutput()
+	s.CtxLog(ctx, fmt.Sprintf("Here -> %v => %v", string(out9), err))
 
 	out6, err := exec.Command("git", "commit", "-am", "DownstreamUpdates").CombinedOutput()
 	if err != nil {
