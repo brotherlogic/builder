@@ -14,6 +14,8 @@ import (
 
 const (
 	WORKING_DIR = "/media/scratch/goscratch"
+	OLD_GO      = "1.18.1"
+	NEW_GO      = "1.19"
 )
 
 func (s *Server) runBuild(ctx context.Context, gha string) error {
@@ -45,6 +47,12 @@ func (s *Server) runBuild(ctx context.Context, gha string) error {
 	out3, err := exec.Command("go", "mod", "tidy").CombinedOutput()
 	if err != nil {
 		return status.Errorf(codes.FailedPrecondition, "go mod (%v) %v -> %v", s.Registry.Identifier, err, string(out3))
+	}
+
+	// Add the PR closer file
+	out5, err := exec.Command("awk", fmt.Sprintf("{gsub(/%v/, \"%v\")}", OLD_GO, NEW_GO), ".github/workflows/*.yml").CombinedOutput()
+	if err != nil {
+		return status.Errorf(codes.FailedPrecondition, "awk (%v) -> %v, %v", s.Registry.Identifier, err, string(out5))
 	}
 
 	out6, err := exec.Command("git", "commit", "-am", "DownstreamUpdates").CombinedOutput()
