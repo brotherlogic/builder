@@ -36,6 +36,20 @@ func (s *Server) runBuild(ctx context.Context, gha string) error {
 		return status.Errorf(codes.FailedPrecondition, "clone (%v) %v -> %v", s.Registry.Identifier, err, string(out1))
 	}
 
+	// Add the PR closer file
+	_, err = exec.Command("curl", "https: //raw.githubusercontent.com/brotherlogic/discovery/main/clean_branches.sh", "-o", "./clean_branches.sh").CombinedOutput()
+	if err != nil {
+		return status.Errorf(codes.FailedPrecondition, "Failed download: %v", err)
+	}
+	_, err = exec.Command("chmod", "u+x", "./clean_branches.sh").CombinedOutput()
+	if err != nil {
+		return status.Errorf(codes.FailedPrecondition, "Failed chmod: %v", err)
+	}
+	_, err = exec.Command("./clean_branches.sh").CombinedOutput()
+	if err != nil {
+		return status.Errorf(codes.FailedPrecondition, "Failed clean: %v", err)
+	}
+
 	branch := fmt.Sprintf("update-%v", time.Now().Unix())
 	out1a, err := exec.Command("git", "checkout", "-b", branch).CombinedOutput()
 	if err != nil {
