@@ -53,7 +53,7 @@ func (s *Server) runBuild(ctx context.Context, gha string) error {
 	}
 
 	// Add the PR closer file
-	out5, err := exec.Command("awk", fmt.Sprintf("'{gsub(/%v/, \"%v\")}'", OLD_GO, NEW_GO), ".github/workflows/basicrun.yml").CombinedOutput()
+	out5, err := exec.Command("sed", fmt.Sprintf("s/%v/%v/g", OLD_GO, NEW_GO), ".github/workflows/basicrun.yml").CombinedOutput()
 	if err != nil {
 		return status.Errorf(codes.FailedPrecondition, "awk (%v) -> %v, %v", s.Registry.Identifier, err, string(out5))
 	}
