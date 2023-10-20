@@ -23,7 +23,10 @@ func (s *Server) runBuild(ctx context.Context, gha string) error {
 	s.lock.Lock()
 	defer s.lock.Unlock()
 
-	os.MkdirAll(WORKING_DIR, 0700)
+	err := os.MkdirAll(WORKING_DIR, 0700)
+	if err != nil {
+		return status.Errorf(codes.AlreadyExists, fmt.Sprintf("Cannot make scratch dir: %v", err))
+	}
 	defer os.RemoveAll(WORKING_DIR)
 
 	os.Chdir(WORKING_DIR)

@@ -15,12 +15,7 @@ import (
 
 	//Needed to pull in gzip encoding init
 	_ "google.golang.org/grpc/encoding/gzip"
-	"google.golang.org/grpc/resolver"
 )
-
-func init() {
-	resolver.Register(&utils.DiscoveryClientResolverBuilder{})
-}
 
 func main() {
 	ctx, cancel := utils.ManualContext("builder-cli", time.Minute*10)
