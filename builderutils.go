@@ -37,7 +37,7 @@ func (s *Server) runBuild(ctx context.Context, gha string) error {
 	}
 
 	// Add the PR closer file
-	_, err = exec.Command("curl", "https: //raw.githubusercontent.com/brotherlogic/discovery/main/clean_branches.sh", "-o", "./clean_branches.sh").CombinedOutput()
+	_, err = exec.Command("curl", "https://raw.githubusercontent.com/brotherlogic/discovery/main/clean_branches.sh", "-o", "./clean_branches.sh").CombinedOutput()
 	if err != nil {
 		return status.Errorf(codes.FailedPrecondition, "Failed download: %v", err)
 	}
