@@ -7,6 +7,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/prometheus/client_golang/prometheus"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -22,6 +23,9 @@ func (s *Server) runBuild(ctx context.Context, gha string) error {
 	// Only build one thing at a time
 	s.lock.Lock()
 	defer s.lock.Unlock()
+
+	t1 := time.Now()
+	defer btime.With(prometheus.Labels{"job": req.GetJob()}).Set(float64(time.Since(t1).Seconds()))
 
 	err := os.MkdirAll(WORKING_DIR, 0700)
 	if err != nil {
