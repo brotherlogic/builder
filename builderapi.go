@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"time"
 
 	"golang.org/x/net/context"
 
@@ -26,9 +25,7 @@ var (
 // AddRecord adds a record into the system
 func (s *Server) Refresh(ctx context.Context, req *pb.RefreshRequest) (*pb.RefreshResponse, error) {
 	s.CtxLog(ctx, fmt.Sprintf("Building for %v", req.GetJob()))
-	t1 := time.Now()
 	err := s.runBuild(ctx, fmt.Sprintf("git@github.com:brotherlogic/%v", req.GetJob()))
-	btime.With(prometheus.Labels{"job": req.GetJob()}).Set(float64(time.Since(t1).Seconds()))
 
 	s.CtxLog(ctx, fmt.Sprintf("Build result: %v", err))
 	if err != nil {
