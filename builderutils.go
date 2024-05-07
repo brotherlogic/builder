@@ -15,7 +15,7 @@ import (
 
 const (
 	WORKING_DIR = "/media/scratch/goscratch"
-	OLD_GO      = "1.19.2"
+	OLD_GO      = "1.19"
 	NEW_GO      = "1.22"
 )
 
