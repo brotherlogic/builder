@@ -15,8 +15,8 @@ import (
 
 const (
 	WORKING_DIR = "/media/scratch/goscratch"
-	OLD_GO      = "1.18.1"
-	NEW_GO      = "1.19"
+	OLD_GO      = "1.19"
+	NEW_GO      = "1.22"
 )
 
 func (s *Server) runBuild(ctx context.Context, gha string) error {
