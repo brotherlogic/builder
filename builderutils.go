@@ -19,7 +19,7 @@ const (
 )
 
 var (
-	OLD_GO = []string{"1.19", "1.19.2"}
+	OLD_GO = []string{"1.19.2", "1.19"}
 )
 
 func (s *Server) runBuild(ctx context.Context, gha string) error {
