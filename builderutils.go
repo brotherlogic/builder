@@ -90,6 +90,10 @@ func (s *Server) runBuild(ctx context.Context, gha string) error {
 	out9, err := exec.Command("git", "add", ".github/workflows/close.yml").CombinedOutput()
 	s.CtxLog(ctx, fmt.Sprintf("Here -> %v => %v", string(out9), err))
 
+	// Ensure we add clean branches if not present
+	out10, err := exec.Command("git", "add", "clean_branches.sh").CombinedOutput()
+	s.CtxLog(ctx, fmt.Sprintf("Here -> %v => %v", string(out10), err))
+
 	out6, err := exec.Command("git", "commit", "-am", "DownstreamUpdates").CombinedOutput()
 	if err != nil {
 		if !strings.Contains(string(out6), "nothing to commit") {
