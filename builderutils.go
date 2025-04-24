@@ -53,9 +53,9 @@ func (s *Server) runBuild(ctx context.Context, gha string) error {
 	if err != nil {
 		return status.Errorf(codes.FailedPrecondition, "Failed chmod: %v", err)
 	}
-	out, err := exec.Command("./clean_branches.sh").CombinedOutput()
+	_, err = exec.Command("./clean_branches.sh").CombinedOutput()
 	if err != nil {
-		return status.Errorf(codes.FailedPrecondition, "Failed clean: %v -> %v", err, string(out))
+		s.CtxLog(ctx, fmt.Sprintf("Failed clean: %v", err))
 	}
 
 	branch := fmt.Sprintf("update-%v", time.Now().Unix())
