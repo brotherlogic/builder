@@ -33,7 +33,7 @@ func (s *Server) runBuild(ctx context.Context, gha string) error {
 
 	err := os.MkdirAll(WORKING_DIR, 0700)
 	if err != nil {
-		return status.Errorf(codes.AlreadyExists, fmt.Sprintf("Cannot make scratch dir: %v", err))
+		return status.Errorf(codes.AlreadyExists, "Cannot make scratch dir: %v", err)
 	}
 	defer os.RemoveAll(WORKING_DIR)
 
